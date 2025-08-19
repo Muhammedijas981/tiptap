@@ -1,0 +1,6 @@
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* space between pages */
+  padding-bottom: 40px; /* space at bottom */
+}

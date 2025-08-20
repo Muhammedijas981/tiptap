@@ -28,7 +28,7 @@ export const useEditorStore = create<EditorState & EditorActions>((set) => ({
   showHeaderFooter: false,
   characterCount: 0,
   currentPage: 1,
-  totalPages: 1,
+  totalPages: 3, // default 3 pages
 
   // Actions
   setMode: (mode) => set({ mode }),
@@ -36,8 +36,6 @@ export const useEditorStore = create<EditorState & EditorActions>((set) => ({
   toggleHeaderFooter: () =>
     set((state) => ({ showHeaderFooter: !state.showHeaderFooter })),
   setCharacterCount: (count) => set({ characterCount: count }),
-  setCurrentPage: (page) => set({ currentPage: page }), // removed extra `)`
-  setTotalPages: (total) => set({ totalPages: total }), // removed extra `)`
-
-  
+  setCurrentPage: (page) => set({ currentPage: page }),
+  setTotalPages: (total) => set({ totalPages: total }),
 }));

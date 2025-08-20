@@ -4,7 +4,8 @@ import { LayoutProps } from "./Layout.types";
 
 export const Layout: React.FC<LayoutProps> = ({
   header,
-  sidebar,
+  leftSidebar,
+  rightSidebar,
   children,
   footer,
 }) => {
@@ -12,10 +13,17 @@ export const Layout: React.FC<LayoutProps> = ({
     <div className={styles.container}>
       {header && <header className={styles.header}>{header}</header>}
       <div className={styles.contentArea}>
-        {sidebar && <aside className={styles.sidebar}>{sidebar}</aside>}
+        {leftSidebar && (
+          <aside className={styles.leftSidebar}>{leftSidebar}</aside>
+        )}
         <main className={styles.main}>{children}</main>
+        {rightSidebar && (
+          <aside className={styles.rightSidebar}>{rightSidebar}</aside>
+        )}
       </div>
       {footer && <footer className={styles.footer}>{footer}</footer>}
     </div>
   );
 };
+
+export default Layout;

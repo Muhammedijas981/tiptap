@@ -1,10 +1,13 @@
+// src/App.tsx
 import React from "react";
 import "./index.css";
-import { Layout } from "./components/Layout";
+import Layout from "./components/Layout";
 import { DocumentCanvas } from "./features/pagination";
-import { Toolbar } from "./features/editor/components/Toolbar";
-import { PageThumbnails } from "./features/sidebar";
+import Toolbar from "./features/editor/components/Toolbar";
+import { PageThumbnails, ToolsSidebar } from "./features/sidebar";
 import { useEditorStore } from "./lib/zustand/store";
+import HorizontalRuler from "./features/ruler/components/HorizontalRuler";
+import { A4_DIMENSIONS } from "./constants/dimensions";
 
 export const App: React.FC = () => {
   const {
@@ -17,13 +20,13 @@ export const App: React.FC = () => {
     toggleRuler,
     toggleHeaderFooter,
     setCurrentPage,
-    setTotalPages,
   } = useEditorStore();
 
   return (
     <Layout
       header={<div className="p-4 bg-indigo-600 text-white">Vettam.AI</div>}
-      sidebar={
+      leftSidebar={<ToolsSidebar />}
+      rightSidebar={
         <PageThumbnails
           totalPages={totalPages}
           currentPage={currentPage}
@@ -46,6 +49,13 @@ export const App: React.FC = () => {
           showHeaderFooter={showHeaderFooter}
           onHeaderFooterToggle={toggleHeaderFooter}
         />
+
+        {mode === "page" && showRuler && (
+          <HorizontalRuler
+            widthPx={A4_DIMENSIONS.WIDTH}
+            unitCm={Math.round(A4_DIMENSIONS.WIDTH / 21)}
+          />
+        )}
 
         <main className="flex-1 p-6 overflow-auto">
           <DocumentCanvas />

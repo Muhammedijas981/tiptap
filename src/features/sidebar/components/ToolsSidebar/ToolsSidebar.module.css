@@ -1,0 +1,50 @@
+.container {
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.newChat {
+  width: 100%;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 8px;
+  font-size: 0.875rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.newChat:hover {
+  background: #ff4757;
+}
+
+.nav {
+  margin-top: 24px;
+}
+
+.sectionTitle {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  margin: 12px 0 4px;
+  opacity: 0.7;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e0dcf9;
+  padding: 6px 0;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: white;
+}

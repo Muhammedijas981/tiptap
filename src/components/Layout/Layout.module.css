@@ -6,34 +6,36 @@
 
 .header {
   flex: 0 0 auto;
-  background: #4f46e5;
-  color: white;
-  padding: 16px;
 }
 
 .contentArea {
-  flex: 1 1 auto;
+  flex: 1;
   display: flex;
   overflow: hidden;
 }
 
-.sidebar {
-  flex: 0 0 250px;
-  background: #f3f4f6;
-  padding: 16px;
+.leftSidebar {
+  flex: 0 0 300px;
+  background: #3f2c7c;
+  color: white;
   overflow-y: auto;
 }
 
 .main {
-  flex: 1 1 auto;
-  padding: 16px;
+  flex: 1;
   overflow-y: auto;
+  background: #f8fafc;
+}
+
+.rightSidebar {
+  flex: 0 0 250px;
   background: #ffffff;
+  border-left: 1px solid #e2e8f0;
+  overflow-y: auto;
 }
 
 .footer {
   flex: 0 0 auto;
-  background: #e5e7eb;
-  padding: 16px;
+  background: #f3f4f6;
   text-align: center;
 }

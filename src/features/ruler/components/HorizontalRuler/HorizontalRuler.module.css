@@ -1,0 +1,27 @@
+.ruler {
+  position: relative;
+  height: 24px;
+  background: #f3f4f6;
+  border-bottom: 1px solid #d1d5db;
+  margin-bottom: 8px;
+}
+
+.tick {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.line {
+  width: 1px;
+  height: 8px;
+  background: #6b7280;
+}
+
+.label {
+  margin-top: 2px;
+  font-size: 0.625rem;
+  color: #6b7280;
+}

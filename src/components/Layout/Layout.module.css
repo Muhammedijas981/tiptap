@@ -15,8 +15,11 @@
 }
 
 .leftSidebar {
+  display: flex;
   flex: 0 0 300px;
-  background: #3f2c7c;
+  justify-content: center;
+  align-items: center;
+  background: #edecec;
   color: white;
   overflow-y: auto;
 }

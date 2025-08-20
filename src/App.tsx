@@ -24,7 +24,7 @@ export const App: React.FC = () => {
 
   return (
     <Layout
-      header={<div className="p-4 bg-indigo-600 text-white">Vettam.AI</div>}
+      // header={<div className="p-4 bg-indigo-600 text-white">Vettam.AI</div>}
       leftSidebar={<ToolsSidebar />}
       rightSidebar={
         <PageThumbnails
@@ -33,11 +33,11 @@ export const App: React.FC = () => {
           onSelectPage={setCurrentPage}
         />
       }
-      footer={
-        <div className="p-2 text-center text-sm text-gray-500">
-          © 2025 Vettam AI
-        </div>
-      }
+      // footer={
+      //   <div className="p-2 text-center text-sm text-gray-500">
+      //     © 2025 Vettam AI
+      //   </div>
+      // }
     >
       <div className="flex flex-col h-full">
         <Toolbar

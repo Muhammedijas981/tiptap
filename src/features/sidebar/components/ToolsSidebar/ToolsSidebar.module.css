@@ -1,50 +1,328 @@
-.container {
-  padding: 16px;
-  font-family: system-ui, sans-serif;
+/* src/features/sidebar/components/ToolsSidebar/ToolsSidebar.module.css */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  height: 97vh;
+  background: linear-gradient(180deg, #4a3985 0%, #3d2f7a 50%, #2e2066 100%);
+  color: white;
+  border-radius: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  justify-content: cneter;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 16px 12px 16px;
 }
 
 .logo {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.logoText {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.collapseButton {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.collapseButton:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.newChatContainer {
+  padding: 0 16px 16px 16px;
 }
 
 .newChat {
   width: 100%;
-  background: #ff6b6b;
-  color: white;
+  padding: 10px 14px;
+  background: #e85a3f;
   border: none;
-  padding: 8px;
-  font-size: 0.875rem;
-  border-radius: 4px;
+  border-radius: 6px;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .newChat:hover {
-  background: #ff4757;
+  background: #d94c32;
+  transform: translateY(-1px);
 }
 
-.nav {
-  margin-top: 24px;
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 0 16px 0;
+}
+
+.section {
+  margin-bottom: 16px;
+}
+
+.sectionHeader {
+  padding: 0 16px 10px 16px;
 }
 
 .sectionTitle {
-  font-size: 0.75rem;
+  font-size: 10px;
+  font-weight: 600;
   text-transform: uppercase;
-  margin: 12px 0 4px;
-  opacity: 0.7;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.5px;
 }
 
-.link {
+.itemsContainer {
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0 16px;
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #e0dcf9;
-  padding: 6px 0;
-  font-size: 0.875rem;
+  gap: 10px;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s;
+  font-weight: 400;
 }
 
-.link:hover {
+.item:hover {
+  background: rgba(255, 255, 255, 0.1);
   color: white;
+}
+
+.item.active {
+  background: white;
+  color: #4a3985;
+  font-weight: 500;
+}
+
+.chatHistoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px 6px 16px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.5px;
+}
+
+.todayHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px 6px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+}
+
+.chatList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 16px;
+}
+
+.chatItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.3;
+}
+
+.chatText {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.moreBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.moreBtn:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.viewMore {
+  margin: 12px 20px 0 20px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: underline;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.viewMore:hover {
+  color: white;
+}
+
+.footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatarsSection {
+  margin-bottom: 16px;
+}
+
+.avatars {
+  display: flex;
+  align-items: center;
+  gap: -8px;
+  position: relative;
+}
+
+.avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #4a3985;
+  position: relative;
+  margin-left: -6px;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+}
+
+.avatar:nth-child(2) {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+}
+
+.avatar:nth-child(3) {
+  background: linear-gradient(135deg, #45b7d1, #3498db);
+}
+
+.notificationDot {
+  width: 16px;
+  height: 16px;
+  background: #e85a3f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 600;
+  color: white;
+  margin-left: 3px;
+  border: 2px solid #4a3985;
+}
+
+.userSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userAvatar {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.userName {
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+}
+
+.footerActions {
+  display: flex;
+  gap: 8px;
+}
+
+.footerIcon {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.2s;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.footerIcon:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Scrollbar */
+.content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }

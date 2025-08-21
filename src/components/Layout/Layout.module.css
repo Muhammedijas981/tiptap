@@ -28,12 +28,16 @@
   flex: 1;
   overflow-y: auto;
   background: #f8fafc;
+  justify-content: center;
+  align-items: center;
 }
 
 .rightSidebar {
+  display: flex;
   flex: 0 0 250px;
-  background: #ffffff;
-  border-left: 1px solid #e2e8f0;
+  background: #f1f1f1;
+  justify-content: center;
+  align-items: center;
   overflow-y: auto;
 }
 

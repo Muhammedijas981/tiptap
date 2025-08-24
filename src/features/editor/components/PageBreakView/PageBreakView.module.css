@@ -1,0 +1,31 @@
+.pageBreak {
+  margin: 16px 0;
+  user-select: none;
+}
+
+.line {
+  position: relative;
+  border-top: 2px dashed #3b82f6;
+  padding: 8px 0;
+  text-align: center;
+}
+
+.label {
+  background: white;
+  color: #3b82f6;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #3b82f6;
+}
+
+@media print {
+  .pageBreak {
+    page-break-after: always;
+    break-after: page;
+    height: 0;
+    margin: 0;
+    visibility: hidden;
+  }
+}

@@ -28,9 +28,11 @@ export const App: React.FC = () => {
       leftSidebar={<ToolsSidebar />}
       rightSidebar={
         <PageThumbnails
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onSelectPage={setCurrentPage}
+          {...({
+            totalPages,
+            currentPage,
+            onSelectPage: setCurrentPage,
+          } as any)}
         />
       }
       // footer={

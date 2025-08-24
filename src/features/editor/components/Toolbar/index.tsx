@@ -10,6 +10,7 @@ import {
   AlignRight,
   List,
   ListOrdered,
+  Scissors,
 } from "lucide-react";
 import styles from "./Toolbar.module.css";
 
@@ -86,6 +87,17 @@ export const Toolbar: React.FC<ToolbarProps> = ({
             </Button>
             <Button variant="secondary" size="sm">
               Character count
+            </Button>
+            {/* NEW: Page Break Button */}
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => editor?.commands.insertPageBreak()}
+              disabled={!editor}
+              title="Insert Page Break (Ctrl+Enter)"
+            >
+              <Scissors size={16} />
+              Page Break
             </Button>
           </div>
         )}

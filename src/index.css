@@ -33,3 +33,39 @@ a:hover {
   height: 100vh;
   width: 100%;
 }
+
+/* Auto pagination styles */
+.auto-page-break {
+  height: 20px;
+  margin: 20px 0;
+  border-top: 1px dashed #cbd5e1;
+  position: relative;
+}
+
+.auto-page-break::after {
+  content: "Automatic Page Break";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: #64748b;
+  font-size: 0.75rem;
+  padding: 0 8px;
+}
+
+@media print {
+  .auto-page-break {
+    page-break-after: always;
+    break-after: page;
+    height: 0;
+    margin: 0;
+    border: none;
+    visibility: hidden;
+  }
+  
+  .auto-page-break::after {
+    display: none;
+  }
+}
+

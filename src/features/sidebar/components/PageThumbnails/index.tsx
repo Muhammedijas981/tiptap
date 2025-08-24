@@ -1,16 +1,23 @@
 import React, { useState } from "react";
-import { Send, ChevronRight } from "lucide-react";
 import styles from "./PageThumbnails.module.css";
+import { PageThumbnailsProps } from "./PageThumbnails.types";
+import { Send, ChevronRight } from "lucide-react";
 
-export const PageThumbnails = ({
-  totalPages = 3,
+export const PageThumbnails: React.FC<PageThumbnailsProps> = ({
+  totalPages = 1,
   currentPage = 1,
-  // onSelectPage,
+  onSelectPage,
 }) => {
   const [activeTab, setActiveTab] = useState("Thumbnail");
   const [chatInput, setChatInput] = useState("");
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  const handlePageClick = (pageNum: number) => {
+    if (onSelectPage) {
+      onSelectPage(pageNum);
+    }
+  };
 
   return (
     <div className={styles.sidebar}>
@@ -29,7 +36,7 @@ export const PageThumbnails = ({
             </button>
           ))}
           <button className={styles.expandButton}>
-            <ChevronRight size={14} />
+            <ChevronRight size={16} />
           </button>
         </div>
       </div>
@@ -44,41 +51,28 @@ export const PageThumbnails = ({
                 className={`${styles.thumbnailItem} ${
                   pageNum === currentPage ? styles.activePage : ""
                 }`}
-                // onClick={() => onSelectPage && onSelectPage(pageNum)}
+                onClick={() => handlePageClick(pageNum)}
               >
-                {/* PDF Thumbnail */}
-                <div className={styles.pdfThumbnail}>
-                  {/* Page indicators at top */}
-                  <div className={styles.pageIndicators}>
-                    <div className={styles.pageIndicator}></div>
-                    <div className={styles.pageIndicator}></div>
-                    <div className={styles.pageIndicator}></div>
-                    <div className={styles.pageIndicator}></div>
-                  </div>
-
-                  {/* PDF Header */}
+                {/* PDF Preview */}
+                <div className={styles.pdfPreview}>
                   <div className={styles.pdfHeader}>PDF</div>
-
-                  {/* PDF Content */}
                   <div className={styles.pdfContent}>
                     <div className={styles.pdfText}>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua.
                     </div>
-
-                    <div className={styles.bulletList}>
-                      <div className={styles.bulletItem}>
+                    <div className={styles.bulletPoints}>
+                      <div className={styles.bullet}>
                         • Lorem ipsum dolor sit amet
                       </div>
-                      <div className={styles.bulletItem}>
+                      <div className={styles.bullet}>
                         • Lorem ipsum dolor sit amet
                       </div>
-                      <div className={styles.bulletItem}>
+                      <div className={styles.bullet}>
                         • Lorem ipsum dolor sit amet
                       </div>
                     </div>
-
                     <div className={styles.pdfText}>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -86,6 +80,9 @@ export const PageThumbnails = ({
                     </div>
                   </div>
                 </div>
+
+                {/* Page Number */}
+                <div className={styles.pageNumber}>{pageNum}</div>
               </div>
             ))}
           </div>
@@ -108,7 +105,7 @@ export const PageThumbnails = ({
         )}
       </div>
 
-      {/* Chat Input Section */}
+      {/* Chat Input */}
       <div className={styles.chatSection}>
         <div className={styles.chatInputContainer}>
           <input

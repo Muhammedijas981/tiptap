@@ -1,64 +1,86 @@
-import { Editor } from "@tiptap/react";
 import { useEffect, useState } from "react";
-import { A4_DIMENSIONS, CONTENT_AREA } from "@/constants/dimensions";
+import { Editor } from "@tiptap/react";
+
+const PAGE_HEIGHT = 931; // A4 content height in pixels (1123 - 192 for margins)
 
 export interface PageSlice {
-  start: number;
-  end: number;
   content: string;
+  pageNumber: number;
+  overflow: boolean;
 }
 
-export function usePagination(editor: Editor | null) {
+export function useAutoPagination(editor: Editor | null) {
   const [pages, setPages] = useState<PageSlice[]>([]);
 
   useEffect(() => {
     if (!editor) return;
 
     const updatePagination = () => {
-      const doc = editor.state.doc.toString();
-      const { WIDTH, HEIGHT } = A4_DIMENSIONS;
-      const maxHeight = CONTENT_AREA.HEIGHT;
+      const content = editor.getHTML();
 
-      // Temporary hidden container for measuring
-      const container = document.createElement("div");
-      container.style.visibility = "hidden";
-      container.style.position = "absolute";
-      container.style.width = `${WIDTH}px`;
-      container.style.padding = `0 ${A4_DIMENSIONS.MARGINS.LEFT}px`;
-      container.innerHTML = editor.getHTML();
-      document.body.appendChild(container);
+      // First split by manual page breaks
+      const manualBreaks = content.split(
+        /<div[^>]*data-type="page-break"[^>]*><\/div>/g
+      );
 
-      const slices: PageSlice[] = [];
-      let start = 0;
-      let end = 0;
+      const allPages: PageSlice[] = [];
 
-      while (start < doc.length) {
-        // Expand end until content fits maxHeight
-        end = doc.length;
-        let low = start,
-          high = doc.length;
+      manualBreaks.forEach((section, sectionIndex) => {
+        if (!section.trim()) return;
 
-        while (low < high) {
-          const mid = Math.ceil((low + high) / 2);
-          container.innerHTML = doc.slice(start, mid);
-          const height = container.scrollHeight;
+        // Check if this section fits in one page
+        const tempDiv = document.createElement("div");
+        tempDiv.style.position = "absolute";
+        tempDiv.style.visibility = "hidden";
+        tempDiv.style.width = "650px"; // A4 content width
+        tempDiv.style.fontSize = "12pt";
+        tempDiv.style.lineHeight = "1.5";
+        tempDiv.innerHTML = section;
+        document.body.appendChild(tempDiv);
 
-          if (height > maxHeight) {
-            high = mid - 1;
-          } else {
-            low = mid;
+        const sectionHeight = tempDiv.scrollHeight;
+        document.body.removeChild(tempDiv);
+
+        if (sectionHeight <= PAGE_HEIGHT) {
+          // Fits in one page
+          allPages.push({
+            content: section,
+            pageNumber: allPages.length + 1,
+            overflow: false,
+          });
+        } else {
+          // Need to split this section
+          allPages.push({
+            content: section,
+            pageNumber: allPages.length + 1,
+            overflow: true,
+          });
+
+          // Add overflow pages (simplified)
+          const overflowPages = Math.ceil(sectionHeight / PAGE_HEIGHT) - 1;
+          for (let i = 0; i < overflowPages; i++) {
+            allPages.push({
+              content: "<p>[Continued from previous page...]</p>",
+              pageNumber: allPages.length + 1,
+              overflow: false,
+            });
           }
         }
+      });
 
-        end = low;
-        slices.push({ start, end, content: doc.slice(start, end) });
-        start = end;
+      // Ensure at least one page
+      if (allPages.length === 0) {
+        allPages.push({
+          content: "<p></p>",
+          pageNumber: 1,
+          overflow: false,
+        });
       }
 
-      document.body.removeChild(container);
-      setPages(slices);
+      setPages(allPages);
     };
 
+    // Update on content change
     editor.on("update", updatePagination);
     updatePagination();
 

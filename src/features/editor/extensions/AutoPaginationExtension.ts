@@ -2,8 +2,8 @@ import { Extension } from "@tiptap/core";
 import { Plugin, PluginKey } from "@tiptap/pm/state";
 import { Decoration, DecorationSet } from "@tiptap/pm/view";
 
-const PAGE_HEIGHT = 931; // A4 content height in pixels
-const LINE_HEIGHT = 18; // Approximate line height in pixels
+const PAGE_HEIGHT = 931; 
+const LINE_HEIGHT = 18; 
 
 export const AutoPaginationExtension = Extension.create({
   name: "autoPagination",
@@ -22,7 +22,7 @@ export const AutoPaginationExtension = Extension.create({
             state.doc.descendants((node, pos) => {
               if (node.isText) return;
 
-              // Estimate node height
+              
               let nodeHeight = 0;
               if (node.type.name === "paragraph") {
                 nodeHeight =
@@ -33,14 +33,14 @@ export const AutoPaginationExtension = Extension.create({
               } else if (node.type.name === "listItem") {
                 nodeHeight = LINE_HEIGHT;
               } else if (node.type.name === "pageBreak") {
-                // Force new page
+                
                 currentHeight = PAGE_HEIGHT;
                 nodeHeight = 0;
               }
 
-              // Check if we need a page break
+              
               if (currentHeight + nodeHeight > PAGE_HEIGHT) {
-                // Insert automatic page break decoration
+                
                 decorations.push(
                   Decoration.widget(
                     pos,

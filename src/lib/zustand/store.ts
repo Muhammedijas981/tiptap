@@ -1,4 +1,4 @@
-// src/lib/zustand/store.ts
+
 import { create } from "zustand";
 
 export type EditorMode = "text" | "page";
@@ -22,15 +22,15 @@ interface EditorActions {
 }
 
 export const useEditorStore = create<EditorState & EditorActions>((set) => ({
-  // State
+  
   mode: "text",
   showRuler: false,
   showHeaderFooter: false,
   characterCount: 0,
   currentPage: 1,
-  totalPages: 3, // default 3 pages
+  totalPages: 3, 
 
-  // Actions
+  
   setMode: (mode) => set({ mode }),
   toggleRuler: () => set((state) => ({ showRuler: !state.showRuler })),
   toggleHeaderFooter: () =>

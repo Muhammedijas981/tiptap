@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import "./index.css";
 import Layout from "./components/Layout";
@@ -38,27 +39,29 @@ export const App: React.FC = () => {
         />
       }
     >
-      <div className="flex flex-col h-full">
-        <Toolbar
-          editor={currentEditor}
-          mode={mode}
-          onModeChange={setMode}
-          showRuler={showRuler}
-          onRulerToggle={toggleRuler}
-          showHeaderFooter={showHeaderFooter}
-          onHeaderFooterToggle={toggleHeaderFooter}
-        />
-
-        {mode === "page" && showRuler && (
-          <HorizontalRuler
-            widthPx={A4_DIMENSIONS.WIDTH}
-            unitCm={Math.round(A4_DIMENSIONS.WIDTH / 21)}
+      <div className="flex flex-col h-full w-full items-center">
+        <div className="w-full max-w-[900px] flex flex-col">
+          <Toolbar
+            editor={currentEditor}
+            mode={mode}
+            onModeChange={setMode}
+            showRuler={showRuler}
+            onRulerToggle={toggleRuler}
+            showHeaderFooter={showHeaderFooter}
+            onHeaderFooterToggle={toggleHeaderFooter}
           />
-        )}
 
-        <main className="flex-1 p-6 overflow-auto">
-          <DocumentCanvas onEditorReady={handleEditorReady} />
-        </main>
+          {mode === "page" && showRuler && (
+            <HorizontalRuler
+              widthPx={A4_DIMENSIONS.WIDTH}
+              unitCm={Math.round(A4_DIMENSIONS.WIDTH / 21)}
+            />
+          )}
+
+          <main className="flex justify-center p-6 overflow-auto">
+            <DocumentCanvas onEditorReady={handleEditorReady} />
+          </main>
+        </div>
       </div>
     </Layout>
   );

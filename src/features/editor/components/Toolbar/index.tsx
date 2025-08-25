@@ -37,7 +37,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 }) => {
   return (
     <div className={styles.toolbarContainer}>
-      {/* Main Mode Toggle */}
+      {}
       <div className={styles.mainToolbar}>
         <div className={styles.modeToggle}>
           <Button
@@ -56,7 +56,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           </Button>
         </div>
 
-        {/* Page Mode Controls */}
+        {}
         {mode === "page" && (
           <div className={styles.pageControls}>
             <Button
@@ -88,7 +88,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
             <Button variant="secondary" size="sm">
               Character count
             </Button>
-            {/* NEW: Page Break Button */}
+            {}
             <Button
               variant="secondary"
               size="sm"
@@ -103,9 +103,9 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         )}
       </div>
 
-      {/* Formatting Toolbar */}
+      {}
       <div className={styles.formattingToolbar}>
-        {/* Font Controls */}
+        {}
         <div className={styles.group}>
           <select className={styles.fontSelect}>
             <option>Avenir Next</option>
@@ -120,7 +120,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           </select>
         </div>
 
-        {/* Text Formatting */}
+        {}
         {editor && (
           <>
             <div className={styles.group}>
@@ -147,7 +147,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
               </Button>
             </div>
 
-            {/* Lists */}
+            {}
             <div className={styles.group}>
               <Button
                 variant={

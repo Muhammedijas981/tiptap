@@ -1,0 +1,105 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.header {
+  position: absolute;
+  top: 16px;
+  left: 72px;
+  right: 72px;
+  height: 40px;
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px dashed #3b82f6;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+.footer {
+  position: absolute;
+  bottom: 16px;
+  left: 72px;
+  right: 72px;
+  height: 40px;
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px dashed #3b82f6;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+.header:hover,
+.footer:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #2563eb;
+}
+
+.editing {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: #2563eb;
+  border-style: solid;
+}
+
+.editorContent {
+  flex: 1;
+  font-size: 10pt;
+  color: #374151;
+}
+
+.editorContent .ProseMirror {
+  outline: none;
+  padding: 0;
+  margin: 0;
+  font-size: 10pt;
+  line-height: 1.2;
+}
+
+.editorContent .ProseMirror p {
+  margin: 0;
+  padding: 0;
+}
+
+.placeholder {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+/* Hide in print when not editing */
+@media print {
+  .container {
+    position: static;
+  }
+  
+  .header,
+  .footer {
+    background: transparent !important;
+    border: none !important;
+    position: static;
+    height: auto;
+    margin: 0;
+    padding: 8px 0;
+  }
+  
+  .placeholder {
+    display: none;
+  }
+  
+  .editorContent {
+    font-size: 9pt;
+  }
+}

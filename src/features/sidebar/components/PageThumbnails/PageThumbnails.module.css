@@ -261,3 +261,24 @@
 .content::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Edge */
 }
+
+.thumbnailItem {
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  /* ADD: border and border-radius */
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px;
+  background: white;
+}
+
+.thumbnailItem:hover {
+  transform: scale(1.02);
+  border-color: #cbd5e1;
+}
+
+.activePage {
+  transform: scale(1.02);
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}

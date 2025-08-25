@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Editor } from "@tiptap/react";
 
-const PAGE_HEIGHT = 931; // A4 content height in pixels (1123 - 192 for margins)
+const PAGE_HEIGHT = 931; 
 
 export interface PageSlice {
   content: string;
@@ -18,7 +18,7 @@ export function useAutoPagination(editor: Editor | null) {
     const updatePagination = () => {
       const content = editor.getHTML();
 
-      // First split by manual page breaks
+      
       const manualBreaks = content.split(
         /<div[^>]*data-type="page-break"[^>]*><\/div>/g
       );
@@ -28,11 +28,11 @@ export function useAutoPagination(editor: Editor | null) {
       manualBreaks.forEach((section, sectionIndex) => {
         if (!section.trim()) return;
 
-        // Check if this section fits in one page
+        
         const tempDiv = document.createElement("div");
         tempDiv.style.position = "absolute";
         tempDiv.style.visibility = "hidden";
-        tempDiv.style.width = "650px"; // A4 content width
+        tempDiv.style.width = "650px"; 
         tempDiv.style.fontSize = "12pt";
         tempDiv.style.lineHeight = "1.5";
         tempDiv.innerHTML = section;
@@ -42,21 +42,21 @@ export function useAutoPagination(editor: Editor | null) {
         document.body.removeChild(tempDiv);
 
         if (sectionHeight <= PAGE_HEIGHT) {
-          // Fits in one page
+          
           allPages.push({
             content: section,
             pageNumber: allPages.length + 1,
             overflow: false,
           });
         } else {
-          // Need to split this section
+          
           allPages.push({
             content: section,
             pageNumber: allPages.length + 1,
             overflow: true,
           });
 
-          // Add overflow pages (simplified)
+          
           const overflowPages = Math.ceil(sectionHeight / PAGE_HEIGHT) - 1;
           for (let i = 0; i < overflowPages; i++) {
             allPages.push({
@@ -68,7 +68,7 @@ export function useAutoPagination(editor: Editor | null) {
         }
       });
 
-      // Ensure at least one page
+      
       if (allPages.length === 0) {
         allPages.push({
           content: "<p></p>",
@@ -80,7 +80,7 @@ export function useAutoPagination(editor: Editor | null) {
       setPages(allPages);
     };
 
-    // Update on content change
+    
     editor.on("update", updatePagination);
     updatePagination();
 

@@ -41,7 +41,7 @@ export const PageThumbnails: React.FC<PageThumbnailsProps> = ({
         </div>
       </div>
 
-      {/* Content Area */}
+      {}
       <div className={styles.content}>
         {activeTab === "Thumbnail" && (
           <div className={styles.thumbnailList}>
@@ -53,7 +53,7 @@ export const PageThumbnails: React.FC<PageThumbnailsProps> = ({
                 }`}
                 onClick={() => handlePageClick(pageNum)}
               >
-                {/* PDF Preview */}
+                {}
                 <div className={styles.pdfPreview}>
                   <div className={styles.pdfHeader}>PDF</div>
                   <div className={styles.pdfContent}>
@@ -81,7 +81,7 @@ export const PageThumbnails: React.FC<PageThumbnailsProps> = ({
                   </div>
                 </div>
 
-                {/* Page Number */}
+                {}
                 <div className={styles.pageNumber}>{pageNum}</div>
               </div>
             ))}
@@ -105,7 +105,7 @@ export const PageThumbnails: React.FC<PageThumbnailsProps> = ({
         )}
       </div>
 
-      {/* Chat Input */}
+      {}
       <div className={styles.chatSection}>
         <div className={styles.chatInputContainer}>
           <input

@@ -6,7 +6,7 @@ import PageContainer from "../PageContainer";
 import { useEditorStore } from "@/lib/zustand/store";
 import styles from "./DocumentCanvas.module.css";
 
-// Add interface for editor sharing
+
 interface DocumentCanvasProps {
   onEditorReady?: (editor: any) => void;
 }
@@ -35,14 +35,14 @@ export const DocumentCanvas: React.FC<DocumentCanvasProps> = ({
     `,
   });
 
-  // Pass editor to parent component
+  
   useEffect(() => {
     if (editor && onEditorReady) {
       onEditorReady(editor);
     }
   }, [editor, onEditorReady]);
 
-  // Set initial page count
+  
   useEffect(() => {
     setTotalPages(3);
   }, [setTotalPages]);

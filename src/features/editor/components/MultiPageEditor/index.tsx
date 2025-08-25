@@ -33,12 +33,12 @@ export const MultiPageEditor: React.FC<MultiPageEditorProps> = ({
       document.body.appendChild(tempDiv);
 
       const contentHeight = tempDiv.scrollHeight;
-      const pageHeight = 931; // A4 content area height
+      const pageHeight = 931; 
       const numberOfPages = Math.max(1, Math.ceil(contentHeight / pageHeight));
 
       document.body.removeChild(tempDiv);
 
-      // Split content into pages
+      
       const newPages: string[] = [];
       const parser = new DOMParser();
       const doc = parser.parseFromString(content, "text/html");
@@ -62,7 +62,7 @@ export const MultiPageEditor: React.FC<MultiPageEditorProps> = ({
           currentPageHeight + elementHeight > pageHeight &&
           currentPageContent.length > 0
         ) {
-          // Save current page and start new one
+          
           const pageDiv = document.createElement("div");
           currentPageContent.forEach((el) =>
             pageDiv.appendChild(el.cloneNode(true))
@@ -77,7 +77,7 @@ export const MultiPageEditor: React.FC<MultiPageEditorProps> = ({
         }
       });
 
-      // Add remaining content as final page
+      
       if (currentPageContent.length > 0) {
         const pageDiv = document.createElement("div");
         currentPageContent.forEach((el) =>
@@ -86,7 +86,7 @@ export const MultiPageEditor: React.FC<MultiPageEditorProps> = ({
         newPages.push(pageDiv.innerHTML);
       }
 
-      // Ensure at least one page
+      
       if (newPages.length === 0) {
         newPages.push("<p></p>");
       }
@@ -95,13 +95,13 @@ export const MultiPageEditor: React.FC<MultiPageEditorProps> = ({
       onPageChange?.(newPages.length);
     };
 
-    // Update pages when content changes
+    
     const handleUpdate = () => {
-      setTimeout(updatePages, 100); // Debounce
+      setTimeout(updatePages, 100); 
     };
 
     editor.on("update", handleUpdate);
-    updatePages(); // Initial calculation
+    updatePages(); 
 
     return () => {
       editor.off("update", handleUpdate);

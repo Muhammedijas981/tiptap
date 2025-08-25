@@ -1,6 +1,8 @@
 .canvas {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* space between pages */
-  padding-bottom: 40px; /* space at bottom */
+  align-items: center;   
+  gap: 20px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
 }

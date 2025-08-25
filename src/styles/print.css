@@ -1,0 +1,101 @@
+/* Print-specific styles for headers, footers, and pagination */
+@media print {
+  /* Remove default browser margins */
+  @page {
+    margin: 0;
+    size: A4;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", serif;
+  }
+  
+  /* Hide non-essential UI elements */
+  .toolbar,
+  .sidebar,
+  nav,
+  button:not(.print-visible) {
+    display: none !important;
+  }
+  
+  /* Ensure pages break correctly */
+  .page {
+    page-break-after: always;
+    page-break-inside: avoid;
+    margin: 0;
+    padding: 96px 72px;
+    width: 794px;
+    height: 1123px;
+    background: white;
+    box-shadow: none;
+    border: none;
+  }
+  
+  .page:last-child {
+    page-break-after: avoid;
+  }
+  
+  /* Headers and footers in print */
+  .headerFooterContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .header {
+    position: absolute;
+    top: 16px;
+    left: 72px;
+    right: 72px;
+    background: transparent !important;
+    border: none !important;
+    padding: 8px 0;
+    font-size: 9pt;
+    color: black !important;
+  }
+  
+  .footer {
+    position: absolute;
+    bottom: 16px;
+    left: 72px;
+    right: 72px;
+    background: transparent !important;
+    border: none !important;
+    padding: 8px 0;
+    font-size: 9pt;
+    color: black !important;
+  }
+  
+  /* Page content adjustments */
+  .content {
+    height: 851px; /* Reduced for headers/footers */
+    overflow: visible;
+    page-break-inside: avoid;
+  }
+  
+  .content .ProseMirror {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    font-size: 12pt;
+    line-height: 1.5;
+    color: black;
+  }
+  
+  /* Hide page break markers in print */
+  .page-break-marker,
+  .pageBreak {
+    display: none;
+  }
+  
+  /* Ensure text is black */
+  * {
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

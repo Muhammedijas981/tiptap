@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "module": "Node16", // **Must match** moduleResolution
+    "moduleResolution": "Node16", // **Must match** module
     "jsx": "react-jsx",
     "strict": true,
     "esModuleInterop": true,
@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "types": ["vite/client", "node"],
+    "typeRoots": ["node_modules/@types"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]

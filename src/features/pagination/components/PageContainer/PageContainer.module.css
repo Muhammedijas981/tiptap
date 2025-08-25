@@ -5,14 +5,14 @@
   background: white;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   position: relative;
-  margin-bottom: 20px; /* Space between pages */
-  page-break-after: always; /* For print */
+  margin-bottom: 20px;
+  page-break-after: always;
 }
 
 .content {
-  height: calc(100% - 40px); /* Leave space for footer */
-  overflow: hidden; /* Prevent scrolling within page */
+  height: 931px; /* Exact content height (1123 - 192px margins) */
   position: relative;
+  overflow: hidden; /* Prevent scrolling within page */
 }
 
 /* Active page styling */
@@ -21,25 +21,25 @@
 }
 
 .activePage .content {
-  /* Make sure editor content doesn't overflow */
-  overflow: visible;
+  overflow: hidden; /* Critical: prevent scrolling */
 }
 
 /* Page preview for non-active pages */
 .pagePreview {
   height: 100%;
   overflow: hidden;
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 12pt;
+  line-height: 1.5;
   color: #374151;
+  font-family: "Times New Roman", serif;
 }
 
 .pagePreview p {
-  margin: 0 0 8px 0;
+  margin: 0 0 12px 0;
 }
 
 .pagePreview ul, .pagePreview ol {
-  margin: 8px 0;
+  margin: 12px 0;
   padding-left: 20px;
 }
 
@@ -51,14 +51,27 @@
   color: #6b7280;
 }
 
-/* Tiptap editor specific styles */
+/* Tiptap editor specific styles - CRITICAL FOR NO SCROLLING */
 .content .ProseMirror {
-  height: 100%;
+  height: 931px !important;
+  max-height: 931px !important;
+  overflow: hidden !important;
   outline: none;
-  overflow: hidden; /* Prevent scrolling */
   font-size: 12pt;
   line-height: 1.5;
-  font-family: 'Times New Roman', serif;
+  font-family: "Times New Roman", serif;
+  padding: 0;
+  margin: 0;
+}
+
+/* Hide all scrollbars */
+.content .ProseMirror::-webkit-scrollbar {
+  display: none !important;
+}
+
+.content .ProseMirror {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
 .content .ProseMirror p {
@@ -76,6 +89,11 @@
 .content .ProseMirror h3 {
   margin: 18px 0 12px 0;
   font-weight: bold;
+}
+
+/* Prevent keyboard scrolling */
+.content .ProseMirror * {
+  max-height: inherit;
 }
 
 /* Print styles */

@@ -69,3 +69,21 @@ a:hover {
   }
 }
 
+/* Prevent all scrolling in Tiptap editor within pages */
+.ProseMirror {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.ProseMirror::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  background: transparent !important;
+}
+
+/* Prevent keyboard-triggered scrolling */
+.ProseMirror[contenteditable="true"] {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+

@@ -17,6 +17,32 @@ export const PageContainer: React.FC<PageContainerProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Monitor content height and prevent overflow
+  useEffect(() => {
+    if (!editor || !isActive) return;
+
+    const handleUpdate = () => {
+      const proseMirrorElement =
+        containerRef.current?.querySelector(".ProseMirror");
+      if (!proseMirrorElement) return;
+
+      const contentHeight = proseMirrorElement.scrollHeight;
+      const maxHeight = 931; // A4 content height
+
+      if (contentHeight > maxHeight) {
+        // Content is overflowing - in a real implementation,
+        // this would trigger moving content to next page
+        console.log("Content overflow detected - would move to next page");
+      }
+    };
+
+    editor.on("update", handleUpdate);
+
+    return () => {
+      editor.off("update", handleUpdate);
+    };
+  }, [editor, isActive]);
+
   return (
     <div
       ref={containerRef}

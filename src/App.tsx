@@ -1,5 +1,4 @@
-// src/App.tsx
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 import Layout from "./components/Layout";
 import { DocumentCanvas } from "./features/pagination";
@@ -10,6 +9,8 @@ import HorizontalRuler from "./features/ruler/components/HorizontalRuler";
 import { A4_DIMENSIONS } from "./constants/dimensions";
 
 export const App: React.FC = () => {
+  const [currentEditor, setCurrentEditor] = useState<any>(null);
+
   const {
     mode,
     showRuler,
@@ -22,28 +23,24 @@ export const App: React.FC = () => {
     setCurrentPage,
   } = useEditorStore();
 
+  const handleEditorReady = (editor: any) => {
+    setCurrentEditor(editor);
+  };
+
   return (
     <Layout
-      // header={<div className="p-4 bg-indigo-600 text-white">Vettam.AI</div>}
       leftSidebar={<ToolsSidebar />}
       rightSidebar={
         <PageThumbnails
-          {...({
-            totalPages,
-            currentPage,
-            onSelectPage: setCurrentPage,
-          } as any)}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onSelectPage={setCurrentPage}
         />
       }
-      // footer={
-      //   <div className="p-2 text-center text-sm text-gray-500">
-      //     © 2025 Vettam AI
-      //   </div>
-      // }
     >
       <div className="flex flex-col h-full">
         <Toolbar
-          editor={null}
+          editor={currentEditor}
           mode={mode}
           onModeChange={setMode}
           showRuler={showRuler}
@@ -60,7 +57,7 @@ export const App: React.FC = () => {
         )}
 
         <main className="flex-1 p-6 overflow-auto">
-          <DocumentCanvas />
+          <DocumentCanvas onEditorReady={handleEditorReady} />
         </main>
       </div>
     </Layout>

@@ -1,5 +1,5 @@
-// src/App.tsx
-import React from "react";
+
+import React, { useState } from "react";
 import "./index.css";
 import Layout from "./components/Layout";
 import { DocumentCanvas } from "./features/pagination";
@@ -10,6 +10,8 @@ import HorizontalRuler from "./features/ruler/components/HorizontalRuler";
 import { A4_DIMENSIONS } from "./constants/dimensions";
 
 export const App: React.FC = () => {
+  const [currentEditor, setCurrentEditor] = useState<any>(null);
+
   const {
     mode,
     showRuler,
@@ -22,9 +24,12 @@ export const App: React.FC = () => {
     setCurrentPage,
   } = useEditorStore();
 
+  const handleEditorReady = (editor: any) => {
+    setCurrentEditor(editor);
+  };
+
   return (
     <Layout
-      // header={<div className="p-4 bg-indigo-600 text-white">Vettam.AI</div>}
       leftSidebar={<ToolsSidebar />}
       rightSidebar={
         <PageThumbnails
@@ -33,33 +38,30 @@ export const App: React.FC = () => {
           onSelectPage={setCurrentPage}
         />
       }
-      // footer={
-      //   <div className="p-2 text-center text-sm text-gray-500">
-      //     © 2025 Vettam AI
-      //   </div>
-      // }
     >
-      <div className="flex flex-col h-full">
-        <Toolbar
-          editor={null}
-          mode={mode}
-          onModeChange={setMode}
-          showRuler={showRuler}
-          onRulerToggle={toggleRuler}
-          showHeaderFooter={showHeaderFooter}
-          onHeaderFooterToggle={toggleHeaderFooter}
-        />
-
-        {mode === "page" && showRuler && (
-          <HorizontalRuler
-            widthPx={A4_DIMENSIONS.WIDTH}
-            unitCm={Math.round(A4_DIMENSIONS.WIDTH / 21)}
+      <div className="flex flex-col h-full w-full items-center">
+        <div className="w-full max-w-[900px] flex flex-col">
+          <Toolbar
+            editor={currentEditor}
+            mode={mode}
+            onModeChange={setMode}
+            showRuler={showRuler}
+            onRulerToggle={toggleRuler}
+            showHeaderFooter={showHeaderFooter}
+            onHeaderFooterToggle={toggleHeaderFooter}
           />
-        )}
 
-        <main className="flex-1 p-6 overflow-auto">
-          <DocumentCanvas />
-        </main>
+          {mode === "page" && showRuler && (
+            <HorizontalRuler
+              widthPx={A4_DIMENSIONS.WIDTH}
+              unitCm={Math.round(A4_DIMENSIONS.WIDTH / 21)}
+            />
+          )}
+
+          <main className="flex justify-center p-6 overflow-auto">
+            <DocumentCanvas onEditorReady={handleEditorReady} />
+          </main>
+        </div>
       </div>
     </Layout>
   );

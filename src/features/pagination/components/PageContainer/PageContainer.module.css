@@ -1,21 +1,128 @@
 .page {
-  width: 794px;   /* A4 width at 96 DPI */
-  height: 1123px; /* A4 height at 96 DPI */
+  width: 794px;
+  height: 1123px;
+  margin: 0 auto 20px; 
   padding: 96px 72px;
   background: white;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   position: relative;
+  margin-bottom: 20px;
+  page-break-after: always;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 .content {
-  height: calc(100% - 40px);
+  height: 931px;
+  position: relative;
   overflow: hidden;
+  /* Adjust content area when headers/footers are shown */
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
-.footer {
+/* When headers/footers are active, reduce content area */
+.page:has(.headerFooterActive) .content {
+  height: 851px; /* 931 - 40 (header) - 40 (footer) */
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.activePage {
+  /* border: 2px solid #3b82f6; */
+  border: 1px solid #d1d5db;  
+  cursor: default;
+}
+
+.page:hover,
+.activePage:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pagePreview {
+  height: 100%;
+  overflow: hidden;
+  font-size: 12pt;
+  line-height: 1.5;
+  color: #374151;
+  font-family: "Times New Roman", serif;
+  pointer-events: none;
+}
+
+.pagePreview p {
+  margin: 0 0 12px 0;
+}
+
+.defaultFooter {
   position: absolute;
   bottom: 16px;
   right: 72px;
   font-size: 0.875rem;
   color: #6b7280;
+  font-family: "Times New Roman", serif;
+}
+
+/* Critical: Prevent scrolling in active editor */
+.content .ProseMirror {
+  height: 931px !important;
+  max-height: 931px !important;
+  overflow: hidden !important;
+  outline: none;
+  font-size: 12pt;
+  line-height: 1.5;
+  font-family: "Times New Roman", serif;
+  padding: 0;
+  margin: 0;
+}
+
+.content .ProseMirror::-webkit-scrollbar {
+  display: none !important;
+}
+
+.content .ProseMirror {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+.content .ProseMirror p {
+  margin: 0 0 12px 0;
+}
+
+/* Prevent text selection in inactive pages */
+.page:not(.activePage) {
+  user-select: none;
+}
+
+.activePage .content {
+  user-select: text;
+}
+
+/* Print styles for headers/footers */
+@media print {
+  .page {
+    margin: 0;
+    box-shadow: none;
+    border: none;
+    page-break-after: always;
+    cursor: default;
+  }
+  
+  .activePage {
+    border: none;
+  }
+  
+  .defaultFooter {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+  
+  /* Ensure headers/footers print correctly */
+  .page {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
 }

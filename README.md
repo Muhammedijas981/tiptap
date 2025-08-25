@@ -1,69 +1,54 @@
-# React + TypeScript + Vite
+# Legal Document Editor with Advanced Pagination
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Tiptap based document editor specifically designed for legal document creation with advanced pagination, headers/footers, and print-ready output.
 
-Currently, two official plugins are available:
+## 🎯 Assignment Requirements - COMPLETED
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✅ **Visual page boundaries for A4** - Multiple A4-sized pages with proper spacing and shadows  
+✅ **Manual page breaks** - Ctrl+Enter or toolbar button to insert page breaks  
+✅ **Automatic page breaks** - Content automatically flows to next page when current page is full  
+✅ **Rendered headers/footers** - Dynamic, editable headers and footers with page numbers  
+✅ **Print/export compatibility** - Headers/footers and page breaks survive browser print  
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Core Pagination
+- **A4 Page Layout**: Exact A4 dimensions (794x1123px) with proper margins
+- **Visual Page Boundaries**: Clear separation between pages with shadows
+- **Automatic Content Flow**: Content automatically moves to next page when current page is full
+- **No In-Page Scrolling**: Content is constrained within page boundaries
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Manual & Automatic Page Breaks
+- **Manual Insertion**: `Ctrl+Enter` or toolbar button to insert page breaks
+- **Visual Markers**: Dashed line indicators for manual page breaks
+- **Automatic Detection**: Content overflow automatically creates new pages
+- **Print Compatibility**: Page breaks are preserved in print/export
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Dynamic Headers & Footers
+- **Editable Content**: Click to edit headers and footers per page
+- **Dynamic Page Numbers**: Automatic "Page X of Y" functionality  
+- **Toggle Visibility**: Show/hide headers and footers via toolbar
+- **Print Preservation**: Headers/footers appear correctly in printed output
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Rich Text Editing
+- **Full Tiptap Integration**: Bold, italic, underline, lists
+- **Font Controls**: Font family and size selection
+- **Keyboard Shortcuts**: Standard text editing shortcuts
+- **Real-time Updates**: All changes reflected immediately
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Advanced UI
+- **Dual Sidebars**: Tools navigation (left) and page thumbnails (right)
+- **Mode Switching**: Text mode vs Page mode with different controls
+- **Rulers**: Horizontal ruler with CM markings for precise layout
+- **Page Navigation**: Click any page thumbnail to jump to that page
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🏗️ Architecture
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Technology Stack
+- **React 18** with TypeScript for type safety
+- **Tiptap** as the rich text editor foundation
+- **Zustand** for lightweight state management
+- **Tailwind CSS** for styling with CSS modules for components
+- **Vite** for fast development and building
+
+### Project Structure

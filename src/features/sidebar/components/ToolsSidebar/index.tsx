@@ -1,4 +1,4 @@
-// src/features/sidebar/components/ToolsSidebar/index.tsx
+
 import React from "react";
 import styles from "./ToolsSidebar.module.css";
 import {
@@ -19,11 +19,10 @@ import {
 
 export const ToolsSidebar: React.FC = () => (
   <div className={styles.sidebar}>
-    {/* Header */}
     <div className={styles.header}>
       <div className={styles.logo}>
         <div className={styles.logoIcon}>
-          <LayoutIcon size={20} />
+          <img src="/vettam logo.png" alt="Logo" width={20} height={20} />
         </div>
         <span className={styles.logoText}>Vettam.AI</span>
       </div>
@@ -31,17 +30,12 @@ export const ToolsSidebar: React.FC = () => (
         <LayoutIcon size={16} />
       </button>
     </div>
-
-    {/* New Chat */}
     <div className={styles.newChatContainer}>
       <button className={styles.newChat}>
         <span>New Chat</span>
       </button>
     </div>
-
-    {/* Scrollable content */}
     <div className={styles.content}>
-      {/* Features */}
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <span className={styles.sectionTitle}>Features</span>
@@ -65,8 +59,6 @@ export const ToolsSidebar: React.FC = () => (
           </a>
         </div>
       </div>
-
-      {/* Tools */}
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <span className={styles.sectionTitle}>Tools</span>
@@ -82,8 +74,6 @@ export const ToolsSidebar: React.FC = () => (
           </a>
         </div>
       </div>
-
-      {/* Chat History */}
       <div className={styles.section}>
         <div className={styles.chatHistoryHeader}>
           <Clock size={16} />
@@ -110,8 +100,6 @@ export const ToolsSidebar: React.FC = () => (
         <button className={styles.viewMore}>View more</button>
       </div>
     </div>
-
-    {/* Footer */}
     <div className={styles.footer}>
       <div className={styles.avatarsSection}>
         <div className={styles.avatars}>

@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.activePage,
+.previewPage {
+  width: 794px;
+  height: 1123px;
+  padding: 96px 72px;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.activePage {
+  border-color: #3b82f6;
+}
+
+.activePage .ProseMirror,
+.previewPage {
+  height: calc(100% - 40px);
+  overflow: hidden;
+  font-size: 12pt;
+  line-height: 1.5;
+  font-family: "Times New Roman", serif;
+}
+
+.activePage .ProseMirror {
+  outline: none;
+}
+
+.activePage .ProseMirror p,
+.previewPage p {
+  margin: 0 0 12px 0;
+}
+
+.previewPage {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Auto page break styling */
+.activePage .ProseMirror .auto-page-break::before {
+  content: "Page " attr(data-page);
+  position: absolute;
+  right: 72px;
+  bottom: 16px;
+  font-size: 0.875rem;
+  color: #6b7280;
+}

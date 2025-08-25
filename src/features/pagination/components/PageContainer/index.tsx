@@ -1,32 +1,70 @@
-// src/features/pagination/components/PageContainer/index.tsx
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { EditorContent, Editor } from "@tiptap/react";
+import HeaderFooterContainer from "../../../editor/components/HeaderFooterContainer";
+import { useEditorStore } from "@/lib/zustand/store";
 import styles from "./PageContainer.module.css";
 
 export interface PageContainerProps {
   pageNumber: number;
   editor: Editor | null;
   content: string;
+  isActive?: boolean;
+  onClick?: () => void;
 }
 
 export const PageContainer: React.FC<PageContainerProps> = ({
   pageNumber,
   editor,
   content,
+  isActive = false,
+  onClick,
 }) => {
-  // Render only this slice
-  if (editor) {
-    editor.commands.setContent(content, { emitUpdate: false });
-  }
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { showHeaderFooter, totalPages } = useEditorStore();
+
+  
+  useEffect(() => {
+    if (isActive && editor) {
+      setTimeout(() => {
+        editor.commands.focus();
+      }, 100);
+    }
+  }, [isActive, editor]);
+
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
 
   return (
-    <div className={styles.page}>
-      {editor && (
-        <div className={styles.content}>
+    <div
+      ref={containerRef}
+      className={`${styles.page} ${isActive ? styles.activePage : ""}`}
+      onClick={handleClick}
+    >
+      <div className={styles.content}>
+        {editor && isActive ? (
           <EditorContent editor={editor} />
-        </div>
+        ) : (
+          <div
+            className={styles.pagePreview}
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+        )}
+      </div>
+
+      {}
+      {!showHeaderFooter && (
+        <div className={styles.defaultFooter}>Page {pageNumber}</div>
       )}
-      <div className={styles.footer}>Page {pageNumber}</div>
+
+      {}
+      <HeaderFooterContainer
+        pageNumber={pageNumber}
+        totalPages={totalPages}
+        showHeaderFooter={showHeaderFooter}
+      />
     </div>
   );
 };
